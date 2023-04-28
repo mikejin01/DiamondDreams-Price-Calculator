@@ -1,5 +1,6 @@
 import React, {useState, useRef} from 'react'
 import PriceCalculator from "./PriceCalculator";
+
 function App() {
   const [prices, setPrices] = useState([])
   var [lowestPrice, setLowestPrice] = useState(0)
@@ -21,12 +22,28 @@ function App() {
   function handleAddPrice(e) {
     const priceSold = priceSoldRef.current.value
     const qtySold = qtySoldRef.current.value
-    if (priceSold === 0) return
+    if (priceSold === "0") return
     console.log(priceSold)
     console.log(qtySold)
+    var currentdate = new Date(); 
+    var datetime =  currentdate.getFullYear() + "-" +
+                    (currentdate.getMonth()+1)  + "-" +  
+                    currentdate.getDate() + "-"  + 
+                    currentdate.getHours() + ":"  + 
+                    currentdate.getMinutes() + ":" + 
+                    currentdate.getSeconds();
+
+    setPrices(prevPrices => {
+      
+      return [...prevPrices, {
+        id: datetime, 
+        priceSold: parseFloat(priceSoldRef.current.value),
+        qtySold: parseFloat(qtySoldRef.current.value)
+      }]
+    })
     /**//**/
   }
-  
+
   function handleCostChange(e) {
     console.log("change!")
     var cost = parseFloat((priceCostRef.current.value)*(1+nycSalesTax) + weightCost * parseFloat(priceWeightRef.current.value)*(1+shopeeFee))
@@ -47,7 +64,7 @@ function App() {
   }
   return (
     <>
-        <h1>Diamond Dreams NY</h1>
+        <h1>Diamond Dreams NY</h1> 
         <h2>直播报价计算器 v.1.0</h2>
 
         <span>税前价格（USD）</span>
@@ -60,9 +77,9 @@ function App() {
         <br></br>
         <span>最低价（NT$）： {lowestPrice} </span>
         <br></br>
-        <span>成交价格（NT$）</span><input ref={priceSoldRef} type="number"/>
+        <span>成交价格（NT$）</span><input ref={priceSoldRef} defaultValue="0" type="number"/>
         <br></br>
-        <span>成交件数（CT）</span><input ref={qtySoldRef} type="number"/>
+        <span>成交件数（CT）</span><input ref={qtySoldRef} defaultValue="0" type="number"/>
         <br></br>
         <button onClick={handleAddPrice}>记录成交</button>
         <br></br>
