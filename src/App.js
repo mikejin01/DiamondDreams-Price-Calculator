@@ -45,7 +45,7 @@ function App() {
   return (
     <>
         <h1>Diamond Dreams NY</h1>
-        <h2>直播报价计算器</h2>
+        <h2>直播报价计算器 v.1.0</h2>
 
         <span>税前价格（USD）</span>
         <input ref={priceCostRef} defaultValue="0" type="number" onChange={handleCostChange} />
