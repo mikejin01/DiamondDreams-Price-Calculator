@@ -22,8 +22,11 @@ function App() {
     const priceSold = priceSoldRef.current.value
     const qtySold = qtySoldRef.current.value
     if (priceSold === 0) return
-    console.log(priceSold)/**/
+    console.log(priceSold)
+    console.log(qtySold)
+    /**//**/
   }
+  
   function handleCostChange(e) {
     console.log("change!")
     var cost = parseFloat((priceCostRef.current.value)*(1+nycSalesTax) + weightCost * parseFloat(priceWeightRef.current.value)*(1+shopeeFee))
